@@ -224,7 +224,7 @@ nnoremap <Leader>p :exe "%!prettier --stdin" g:ale_javascript_prettier_options<C
 """" Plugin specific setups
 "" vim-ripgrep
 let g:rg_binary = 'rg'
-let g:rg_command = g:rg_binary . "--vimgrep -S"
+let g:rg_command = g:rg_binary . " --vimgrep -S"
 
 "" vimwiki
 " output directory
