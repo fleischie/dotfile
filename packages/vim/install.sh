@@ -4,9 +4,9 @@ echo "# Installing :: vim"
 
 # symlink config file to home's config files
 echo "## Symlinking vim files to home directories"
-SOURCE_DIR="$(dirname "$(readlink -f "$0")")"
+SCRIPT_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 
-ln -vsf "${SOURCE_DIR}/vimrc" "${HOME}/.config/nvim/init.vim"
+ln -vsf "${SCRIPT_DIR}/vimrc" "${HOME}/.config/nvim/init.vim"
 ln -vsf "${HOME}/.config/nvim" "${HOME}/.vim"
 ln -vsf "${HOME}/.config/nvim/init.vim" "${HOME}/.vimrc"
 
