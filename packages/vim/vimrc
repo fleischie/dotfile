@@ -43,7 +43,6 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'hail2u/vim-css3-syntax'          " extra CSS3 syntax highlighting
     Plug 'sheerun/vim-polyglot'            " language pack
     Plug 'Rip-Rip/clang_complete'          " c/c++ completions
-    Plug 'flowtype/vim-flow'               " flowtype support
 
     " local plugins
     Plug '~/Documents/Programming/vim-styled-components',
@@ -215,9 +214,6 @@ let g:javascript_plugin_flow = 1
 let g:flow#autoclose = 1
 let g:flow#showquickfix = 0
 let g:flow#timeout = 5
-
-" set prettier shortcut
-nnoremap <Leader>p :exe "%!prettier --stdin" g:ale_javascript_prettier_options<CR>
 "-----------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------
@@ -245,7 +241,7 @@ let g:airline_powerline_fonts = 1
 "" Linting
 let g:ale_linters = {
       \   'markdow': ['alex'],
-      \   'javascript': ['prettier', 'flow'],
+      \   'javascript': ['prettier', 'flow', 'eslint'],
       \   'typescript': ['tslint', 'tsserver'],
       \ }
 let g:ale_fixers = {
@@ -257,4 +253,7 @@ let g:ale_javascript_prettier_options =
       \ '--print-width 79 --single-quote --trailing-comma es5'
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_sign_column_always = 3
+
+nnoremap <Leader>al :ALEToggle<CR>
+nnoremap <Leader>af :ALEFix<CR>
 "-----------------------------------------------------------------------------
