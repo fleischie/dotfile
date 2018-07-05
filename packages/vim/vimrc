@@ -197,7 +197,7 @@ let g:clang_use_library = 1
 
 " set clang library path for different OS
 let s:os = substitute(system('uname'), '\n', '', '')
-if s:os == 'Darwin' || os == 'Mac'
+if s:os == 'Darwin' || s:os == 'Mac'
   let g:clang_library_path = '/usr/local/Cellar/llvm/6.0.0/lib/libclang.dylib'
 else
   let g:clang_library_path = '/usr/lib/libclang.so'
