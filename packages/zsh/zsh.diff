@@ -1,0 +1,92 @@
+diff --git a/runcoms/zpreztorc b/runcoms/zpreztorc
+index 28b6005..ca25884 100644
+--- a/runcoms/zpreztorc
++++ b/runcoms/zpreztorc
+@@ -30,8 +30,12 @@ zstyle ':prezto:load' pmodule \
+   'environment' \
+   'terminal' \
+   'editor' \
+-  'history' \
+   'directory' \
++  'git' \
++  'autosuggestions' \
++  'syntax-highlighting' \
++  'history' \
++  'history-substring-search' \
+   'spectrum' \
+   'utility' \
+   'completion' \
+@@ -57,7 +61,7 @@ zstyle ':prezto:load' pmodule \
+ #
+ 
+ # Set the key mapping style to 'emacs' or 'vi'.
+-zstyle ':prezto:module:editor' key-bindings 'emacs'
++zstyle ':prezto:module:editor' key-bindings 'vi'
+ 
+ # Auto convert .... to ../..
+ # zstyle ':prezto:module:editor' dot-expansion 'yes'
+@@ -113,7 +117,7 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
+ # Set the prompt theme to load.
+ # Setting it to 'random' loads a random theme.
+ # Auto set to 'off' on dumb terminals.
+-zstyle ':prezto:module:prompt' theme 'sorin'
++zstyle ':prezto:module:prompt' theme 'agnoster'
+ 
+ # Set the working directory prompt display length.
+ # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
+@@ -164,14 +168,14 @@ zstyle ':prezto:module:prompt' theme 'sorin'
+ 
+ # Set syntax highlighters.
+ # By default, only the main highlighter is enabled.
+-# zstyle ':prezto:module:syntax-highlighting' highlighters \
+-#   'main' \
+-#   'brackets' \
+-#   'pattern' \
+-#   'line' \
+-#   'cursor' \
+-#   'root'
+-#
++zstyle ':prezto:module:syntax-highlighting' highlighters \
++  'main' \
++  'brackets' \
++  'pattern' \
++  'line' \
++  'cursor' \
++  'root'
++
+ # Set syntax highlighting styles.
+ # zstyle ':prezto:module:syntax-highlighting' styles \
+ #   'builtin' 'bg=blue' \
+diff --git a/runcoms/zprofile b/runcoms/zprofile
+index acd7742..0d2f169 100644
+--- a/runcoms/zprofile
++++ b/runcoms/zprofile
+@@ -17,8 +17,8 @@ fi
+ # Editors
+ #
+ 
+-export EDITOR='nano'
+-export VISUAL='nano'
++export EDITOR='nvim'
++export VISUAL='nvim'
+ export PAGER='less'
+ 
+ #
+@@ -61,3 +61,6 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
+ if (( $#commands[(i)lesspipe(|.sh)] )); then
+   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
+ fi
++
++export PATH="$HOME/.cargo/bin:$PATH"
++export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
+diff --git a/runcoms/zshrc b/runcoms/zshrc
+index 039b882..14c0f78 100644
+--- a/runcoms/zshrc
++++ b/runcoms/zshrc
+@@ -11,3 +11,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+ fi
+ 
+ # Customize to your needs...
++if [[ -f "${HOME}/.config/zsh/zshrc" ]]; then
++  source "${HOME}/.config/zsh/zshrc"
++fi

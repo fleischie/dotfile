@@ -1,0 +1,42 @@
+# custom vi prompt (NORMAL/INSERT)
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+function zle-line-init zle-keymap-select {
+  SEPARATOR=""
+  NORMAL="%{%B%k%F{green}%}${SEPARATOR}%{%B%K{green}%F{black}%} N ${SEPARATOR}%{%f%k%b%}"
+  INSERT="%{%B%k%F{blue}%}${SEPARATOR}%{%B%K{blue}%F{black}%} I ${SEPARATOR}%{%f%k%b%}"
+
+  RPS1="${${KEYMAP/vicmd/${NORMAL}}/(main|viins)/${INSERT}}"
+  zle reset-prompt
+}
+
+zle -N zle-keymap-select
+zle -N zle-line-init
+export KEYTIMEOUT=1
+
+# default aliases
+alias less='less -R'
+alias ls='ls -F --color'
+alias vi='${EDITOR}'
+alias vim='${EDITOR}'
+alias vw='vi ${HOME}/Cloud/Texte/vim/vimwiki/index.wiki'
+alias vo='${BROWSER} ${HOME}/Cloud/Texte/vim/vimwiki_html/index.html'
+
+# overwrite macOS specific tools in favor of GNU tools
+COREUTILS_PATH="/usr/local/opt/coreutils/libexec"
+[ -d ${COREUTILS_PATH} ] && export PATH="${COREUTILS_PATH}/gnubin/:$PATH"
+
+# setup virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+export WORKON_HOME=~/.virtualenvs
+[ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
+
+# setup travis command
+[ -f ${HOME}/.travis/travis.sh ] && source ${HOME}/.travis/travis.sh
+
+# add cargo to path
+[ -d ${HOME}/.cargo/bin ] && export PATH="${HOME}/.cargo/bin:$PATH"
