@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # define colors
 RED='\033[0;31m'
@@ -27,7 +27,7 @@ then
 
   # symlink extensions
   setopt EXTENDED_GLOB
-  for rcfile in "${PREZTO_DIR}/runcoms/^README.md(.N)"
+  for rcfile in "${PREZTO_DIR}/runcoms/"^README.md(.N)
   do
     ln -vsf "${rcfile}" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
   done
@@ -40,7 +40,7 @@ EXTENSION_DIR="${HOME}/.config/zsh"
 mkdir -p ${EXTENSION_DIR}
 
 # symlink config file to extension directory
-SCRIPT_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 
 ln -vsf "${SCRIPT_DIR}/zshrc" "${EXTENSION_DIR}/zshrc"
 
