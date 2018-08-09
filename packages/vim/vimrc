@@ -162,7 +162,7 @@ nnoremap <silent> <F9> :TagbarToggle<CR>
 nnoremap <silent> <F10> :set list!<CR>
 
 " close all quickfix/location lists
-noremap <Leader>c :lcl\|ccl<CR>
+noremap <Leader>c :lcl\|ccl\|pclose<CR>
 
 " search in file tree
 noremap <Leader>r :Rg<Cr>
