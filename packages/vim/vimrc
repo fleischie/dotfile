@@ -137,6 +137,7 @@ fun! HighlightOssWarnings()
   match OssWarnings /\c\<\%(obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however\|so,\|easy\)\>/
 endfun
 
+autocmd FileType markdown set textwidth=79
 autocmd InsertEnter *.md call HighlightOssWarnings()
 autocmd InsertLeave *.md call HighlightOssWarnings()
 
