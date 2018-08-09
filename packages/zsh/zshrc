@@ -43,3 +43,11 @@ export WORKON_HOME=~/.virtualenvs
 
 # add yarn to path
 [ -d ${HOME}/.yarn/bin ] && export PATH="${HOME}/.yarn/bin:$PATH"
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /home/karl/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/karl/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh
+
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /home/karl/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh ]] && . /home/karl/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh
