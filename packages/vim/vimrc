@@ -199,6 +199,12 @@ endif
 """" Setup C/C++
 let g:clang_use_library = 1
 
+" set clang completion behavior
+let g:clang_close_preview = 1
+let g:clang_complete_copen = 1
+let g:clang_complete_macros = 1
+let g:clang_complete_patterns = 1
+
 " set clang library path for different OS
 let s:os = substitute(system('uname'), '\n', '', '')
 if s:os == 'Darwin' || s:os == 'Mac'
