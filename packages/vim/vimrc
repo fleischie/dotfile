@@ -134,7 +134,7 @@ autocmd FileType glsl set noexpandtab tabstop=8 shiftwidth=8
 "" Markdown
 " highlight bad phrases for FOSS markdown files
 fun! HighlightOssWarnings()
-  match OssWarnings /\c\<\%(obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however\|so,\|easy\)\>/
+  match OssWarnings /\c\<\%(obviously\|basically\|simply\|of\scourse\|clearly\|\<just\>\|everyone\sknows\|however\|so,\|easy\)\>/
 endfun
 
 autocmd FileType markdown set textwidth=79
