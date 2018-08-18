@@ -75,11 +75,13 @@ set termguicolors
 augroup rando_color
   function! SetRandomColor()
     if exists("g:loaded_rando")
-      execute "color" Choice(s:list_of_good_colorschemes)
+      execute "colorscheme" Choice(s:list_of_good_colorschemes)
+    else
+      colorscheme molokai
+    endif
 
-      if exists("g:loaded_airline")
-        AirlineRefresh
-      endif
+    if exists("g:loaded_airline")
+      AirlineRefresh
     endif
   endfunction
 
