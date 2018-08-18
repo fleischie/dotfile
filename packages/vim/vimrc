@@ -8,7 +8,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'gerw/vim-HiLinkTrace'            " trace syntax highlighting
 
     " colors
-    Plug 'tomasr/molokai'                  " nice color scheme
+    Plug 'flazz/vim-colorschemes'          " color scheme pack
     Plug 'vim-airline/vim-airline'         " extended status-bar
     Plug 'vim-airline/vim-airline-themes'  " color scheme for vim-airline
 
@@ -47,6 +47,7 @@ call plug#begin('~/.config/nvim/plugged')
     " local plugins
     Plug '~/Documents/Programming/vim-styled-components',
           \ { 'branch': 'develop' }
+    Plug '~/Documents/Programming/vim-rando', { 'branch': 'develop' }
 
 call plug#end()
 "-----------------------------------------------------------------------------
@@ -61,16 +62,35 @@ set number
 set relativenumber
 
 " set colorscheme
-set t_Co=256
-set background=dark
-colorscheme molokai
+let s:list_of_good_colorschemes = [
+      \ 'C64',
+      \ 'badwolf',
+      \ 'brogrammer',
+      \ 'deepsea',
+      \ 'distinguished',
+      \ 'molokai',
+      \ ]
+set termguicolors
+
+augroup rando_color
+  function! SetRandomColor()
+    if exists("g:loaded_rando")
+      execute "color" Choice(s:list_of_good_colorschemes)
+
+      if exists("g:loaded_airline")
+        AirlineRefresh
+      endif
+    endif
+  endfunction
+
+  autocmd! VimEnter * :call SetRandomColor()
+augroup END
 
 " draw column (vertical) lines to indicate overlong lines
 set colorcolumn=80,120
 
 " set visible control characters
 set listchars=eol:¶,tab:»»,space:·
-highlight SpecialKey term=standout guifg=#030303
 
 " set tabspace to 4, not expand them to spaces (for make etc.)
 set expandtab
