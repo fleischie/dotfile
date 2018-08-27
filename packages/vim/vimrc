@@ -94,11 +94,6 @@ set colorcolumn=80,120
 " set visible control characters
 set listchars=eol:¶,tab:»»,space:·
 
-" set tabspace to 4, not expand them to spaces (for make etc.)
-set expandtab
-set shiftwidth=2
-set tabstop=2
-
 " set re-usability to the same window
 set hidden
 
@@ -139,19 +134,17 @@ set viewoptions=cursor,folds,slash,unix
 
 "-----------------------------------------------------------------------------
 """" Filetype specifics
-" default to 2 spaces as tabs
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-
 set foldmethod=syntax
 set foldlevelstart=99
 
 "" C
 " setup to insert 8-space wide tabs
-autocmd FileType c set noexpandtab tabstop=8 shiftwidth=8
-autocmd FileType cpp set noexpandtab tabstop=8 shiftwidth=8
-autocmd FileType glsl set noexpandtab tabstop=8 shiftwidth=8
+augroup custom_indent
+  autocmd FileType * set expandtab shiftwidth=2 softtabstop=2 tabstop=2
+  autocmd FileType c set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
+  autocmd FileType cpp set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
+  autocmd FileType glsl set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
+augroup END
 
 "" Markdown
 " highlight bad phrases for FOSS markdown files
