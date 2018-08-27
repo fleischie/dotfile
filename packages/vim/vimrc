@@ -35,9 +35,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'SirVer/ultisnips'                " snippet engine
     Plug 'honza/vim-snippets'              " snippet library
     Plug 'w0rp/ale'                        " asynchronous linting engine
-    Plug 'jiangmiao/auto-pairs'            " insert/delete pair-chars
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-                                           " completion plugin
+    " Plug 'jiangmiao/auto-pairs'            " insert/delete pair-chars
+    Plug 'lifepillar/vim-mucomplete'       " chained completion plugin
 
     " language support
     Plug 'hail2u/vim-css3-syntax'          " extra CSS3 syntax highlighting
@@ -250,12 +249,17 @@ let g:rg_command = g:rg_binary . " --vimgrep -S"
 " output directory
 let g:vimwiki_list = [{'path': '~/Cloud/Texte/vim/vimwiki_html'}]
 
-"" deoplete
-" enable at startup
-let g:deoplete#enable_at_startup = 1
+"" mucomplete
+" enable delayed completion on startup
+let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#delayed_completion = 1
+" extend default chain to include UltiSnips snippets
+let g:mucomplete#chains.default = extend(
+      \ g:mucomplete#chains.default,
+      \ ['ulti'],
+      \ )
 
-"" ultisnips
-" better key bindings for UltiSnipsExpandTrigger
+"" UltiSnips
 let g:UltiSnipsExpandTrigger = '<c-j>'
 
 "" vim-airline
