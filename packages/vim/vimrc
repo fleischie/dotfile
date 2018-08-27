@@ -44,10 +44,9 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'sheerun/vim-polyglot'            " language pack
     Plug 'Rip-Rip/clang_complete'          " c/c++ completions
 
-    " local plugins
-    Plug '~/Documents/Programming/vim-styled-components',
-          \ { 'branch': 'develop' }
-    Plug '~/Documents/Programming/vim-rando', { 'branch': 'develop' }
+    " personal dev plugins
+    Plug 'fleischie/vim-rando', { 'branch': 'main' }
+    Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 call plug#end()
 "-----------------------------------------------------------------------------
