@@ -214,14 +214,13 @@ let g:clang_use_library = 1
 
 " set clang completion behavior
 let g:clang_close_preview = 1
-let g:clang_complete_copen = 1
 let g:clang_complete_macros = 1
 let g:clang_complete_patterns = 1
 
 " set clang library path for different OS
 let s:os = substitute(system('uname'), '\n', '', '')
 if s:os == 'Darwin' || s:os == 'Mac'
-  let g:clang_library_path = '/usr/local/Cellar/llvm/6.0.1/lib/libclang.dylib'
+  let g:clang_library_path = '/usr/local/opt/llvm/lib/libclang.dylib'
 else
   let g:clang_library_path = '/usr/lib/libclang.so'
 endif
@@ -251,16 +250,16 @@ let g:vimwiki_list = [{'path': '~/Cloud/Texte/vim/vimwiki_html'}]
 
 "" mucomplete
 " enable delayed completion on startup
+set completeopt=menuone,preview,noinsert
 let g:mucomplete#enable_auto_at_startup = 1
-let g:mucomplete#delayed_completion = 1
 " extend default chain to include UltiSnips snippets
-let g:mucomplete#chains.default = extend(
-      \ g:mucomplete#chains.default,
-      \ ['ulti'],
-      \ )
+let g:mucomplete#chains = {
+      \ 'vim': ['path', 'cmd', 'keyn'],
+      \ 'default': ['path', 'omni', 'defs', 'keyp', 'ulti']
+      \ }
 
 "" UltiSnips
-let g:UltiSnipsExpandTrigger = '<c-j>'
+let g:UltiSnipsExpandTrigger = '<c-l>'
 
 "" vim-airline
 let g:airline_theme = 'base16_summerfruit'
