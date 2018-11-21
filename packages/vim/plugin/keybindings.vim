@@ -30,3 +30,6 @@ map ≈     <C-x>
 " remaps for moving lines (with vim-move)
 map ∆ <A-j>
 map ˚ <A-k>
+
+" unmap <tab> in insert mode to have it insert a tab
+iunmap <tab>
