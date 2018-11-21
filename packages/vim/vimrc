@@ -129,6 +129,11 @@ set path+=**
 " Setup for folding/restoring
 set viewoptions=cursor,folds,slash,unix
 " let g:skipview_files = ['*\.vim']
+
+" setup netrw (file explorer)
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+nnoremap <Leader>e :40vs +Ex<CR>
 "-----------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------
