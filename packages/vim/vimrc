@@ -1,324 +1,52 @@
-"-----------------------------------------------------------------------------
-"""" plugins
+" see `./plugins` for modular vim configuration
+
+" install and enable external plugins
 call plug#begin('~/.config/nvim/plugged')
-    " default scripts
-    Plug 'vim-scripts/restore_view.vim'    " restore cursor (etc.) position
+  " default scripts
+  Plug 'vim-scripts/restore_view.vim'    " restore cursor (etc.) position
 
-    " vim development
-    Plug 'gerw/vim-HiLinkTrace'            " trace syntax highlighting
+  " vim development
+  Plug 'gerw/vim-HiLinkTrace'            " trace syntax highlighting
 
-    " colors
-    Plug 'flazz/vim-colorschemes'          " color scheme pack
-    Plug 'vim-airline/vim-airline'         " extended status-bar
-    Plug 'vim-airline/vim-airline-themes'  " color scheme for vim-airline
+  " colors
+  Plug 'flazz/vim-colorschemes'          " color scheme pack
+  Plug 'vim-airline/vim-airline'         " extended status-bar
+  Plug 'vim-airline/vim-airline-themes'  " color scheme for vim-airline
 
-    " tpope-block
-    Plug 'tpope/vim-sensible'              " sensible defaults
-    Plug 'tpope/vim-commentary'            " commenting plugin
-    Plug 'tpope/vim-fugitive'              " git extensions
-    Plug 'tpope/vim-repeat'                " repeat custom vi commands
-    Plug 'tpope/vim-speeddating'           " extended in-/decrementing
-    Plug 'tpope/vim-surround'              " quoting/parenthesizing
+  " tpope-block
+  Plug 'tpope/vim-sensible'              " sensible defaults
+  Plug 'tpope/vim-commentary'            " commenting plugin
+  Plug 'tpope/vim-fugitive'              " git extensions
+  Plug 'tpope/vim-repeat'                " repeat custom vi commands
+  Plug 'tpope/vim-speeddating'           " extended in-/decrementing
+  Plug 'tpope/vim-surround'              " quoting/parenthesizing
 
-    " functionality extensions
-    Plug 'vimwiki/vimwiki'                 " personal wiki from inside vim
-    Plug 'google/vim-searchindex'          " display number of search matches
-    Plug 'majutsushi/tagbar'               " tagbar for exuberant ctags
-    Plug 'matze/vim-move'                  " move lines/selections
-    Plug 'airblade/vim-gitgutter'          " show git-diff per line
-    Plug 'PeterRincker/vim-argumentative'  " manipulate function arguments
-    Plug 'junegunn/vim-easy-align'         " alignment plugin
-    Plug 'junegunn/goyo.vim'               " distraction-free writing in vim
-    Plug 'junegunn/limelight.vim'          " emphasize current paragraph
+  " functionality extensions
+  Plug 'vimwiki/vimwiki'                 " personal wiki from inside vim
+  Plug 'google/vim-searchindex'          " display number of search matches
+  Plug 'majutsushi/tagbar'               " tagbar for exuberant ctags
+  Plug 'matze/vim-move'                  " move lines/selections
+  Plug 'airblade/vim-gitgutter'          " show git-diff per line
+  Plug 'PeterRincker/vim-argumentative'  " manipulate function arguments
+  Plug 'junegunn/vim-easy-align'         " alignment plugin
+  Plug 'junegunn/goyo.vim'               " distraction-free writing in vim
+  Plug 'junegunn/limelight.vim'          " emphasize current paragraph
 
-    " workflow runtime plugins
-    Plug 'editorconfig/editorconfig-vim'   " apply editorconfig if available
-    Plug 'jremmen/vim-ripgrep'             " ripgrep integration
-    Plug 'SirVer/ultisnips'                " snippet engine
-    Plug 'honza/vim-snippets'              " snippet library
-    Plug 'w0rp/ale'                        " asynchronous linting engine
-    " Plug 'jiangmiao/auto-pairs'            " insert/delete pair-chars
-    Plug 'lifepillar/vim-mucomplete'       " chained completion plugin
+  " workflow runtime plugins
+  Plug 'editorconfig/editorconfig-vim'   " apply editorconfig if available
+  Plug 'jremmen/vim-ripgrep'             " ripgrep integration
+  Plug 'honza/vim-snippets'              " snippet library
+  Plug 'w0rp/ale'                        " asynchronous linting engine
+  " Plug 'jiangmiao/auto-pairs'            " insert/delete pair-chars
+  Plug 'lifepillar/vim-mucomplete'       " chained completion plugin
+  Plug 'SirVer/ultisnips'                " snippet engine
 
-    " language support
-    Plug 'hail2u/vim-css3-syntax'          " extra CSS3 syntax highlighting
-    Plug 'sheerun/vim-polyglot'            " language pack
-    Plug 'Rip-Rip/clang_complete'          " c/c++ completions
+  " language support
+  Plug 'hail2u/vim-css3-syntax'          " extra CSS3 syntax highlighting
+  Plug 'sheerun/vim-polyglot'            " language pack
+  Plug 'Rip-Rip/clang_complete'          " c/c++ completions
 
-    " personal dev plugins
-    Plug 'fleischie/vim-rando', { 'branch': 'main' }
-    Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-
+  " personal dev plugins
+  Plug 'fleischie/vim-rando', { 'branch': 'main' }
+  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 call plug#end()
-"-----------------------------------------------------------------------------
-
-"-----------------------------------------------------------------------------
-"""" Global setup
-" set encoding
-set encoding=utf-8
-
-" enable numbering of the lines
-set number
-set relativenumber
-
-" set colorscheme
-let s:list_of_good_colorschemes = [
-      \ 'badwolf',
-      \ 'brogrammer',
-      \ 'deepsea',
-      \ 'distinguished',
-      \ 'molokai',
-      \ ]
-set termguicolors
-
-augroup rando_color
-  function! SetRandomColor()
-    if exists("g:loaded_rando")
-      execute "colorscheme" Choice(s:list_of_good_colorschemes)
-    else
-      colorscheme molokai
-    endif
-
-    if exists("g:loaded_airline")
-      AirlineRefresh
-    endif
-  endfunction
-
-  autocmd! VimEnter * :call SetRandomColor()
-augroup END
-
-" draw column (vertical) lines to indicate overlong lines
-set colorcolumn=80,120
-
-" set visible control characters
-set listchars=eol:¶,tab:»»,space:·
-
-" set re-usability to the same window
-set hidden
-
-" show partial commands in last line of screen
-set showcmd
-
-" show highlighted search-results
-highlight Special  cterm=bold
-highlight Comment  cterm=italic
-highlight Type     cterm=italic
-highlight Label    cterm=italic
-
-" highlights can be temporarily removed by <Ctrl>-L
-set hlsearch
-
-" disable certain commands/controls to move cursor to the start of the line
-set nostartofline
-
-" ask for save-confirmation instead of complaining of modified files
-set confirm
-
-" display visual bell, instead of acoustic bell
-set visualbell
-
-" always enable mouse (for all modes)
-set mouse=
-
-" timeout on keycodes, but not on keymappings
-set notimeout ttimeout ttimeoutlen=20
-
-" enable fuzzy find of files
-set path+=**
-
-" Setup for folding/restoring
-set viewoptions=cursor,folds,slash,unix
-" let g:skipview_files = ['*\.vim']
-
-" setup netrw (file explorer)
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-nnoremap <Leader>e :40vs +Ex<CR>
-"-----------------------------------------------------------------------------
-
-"-----------------------------------------------------------------------------
-"""" Filetype specifics
-set foldmethod=syntax
-set foldlevelstart=99
-
-"" C
-" setup to insert 8-space wide tabs
-augroup custom_indent
-  autocmd FileType * set expandtab shiftwidth=2 softtabstop=2 tabstop=2
-  autocmd FileType c set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
-  autocmd FileType cpp set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
-  autocmd FileType lex set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
-  autocmd FileType glsl set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
-  autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
-  autocmd FileType yacc set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
-augroup END
-
-"" Markdown
-" highlight bad phrases for FOSS markdown files
-fun! HighlightOssWarnings()
-  match OssWarnings /\c\<\%(obviously\|basically\|simply\|of\scourse\|clearly\|\<just\>\|everyone\sknows\|however\|so,\|easy\)\>/
-endfun
-
-augroup focussed_writing
-  " hide tmux and vim bars and configure limelight
-  function! s:goyo_enter()
-    silent !tmux set status off
-    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-    set noshowmode
-    set noshowcmd
-    set scrolloff=999
-    Limelight 0.75
-  endfunction
-
-  " reset tmux and vim bars and disable limelight
-  function! s:goyo_leave()
-    silent !tmux set status on
-    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-    set showmode
-    set showcmd
-    set scrolloff=5
-    Limelight!
-  endfunction
-
-  autocmd FileType markdown set textwidth=79
-  autocmd InsertEnter *.md call HighlightOssWarnings()
-  autocmd InsertLeave *.md call HighlightOssWarnings()
-
-  """" Goyo + Limelight
-  autocmd! User GoyoEnter call s:goyo_enter()
-  autocmd! User GoyoLeave call s:goyo_leave()
-  nnoremap <Leader>G :Goyo<CR>
-augroup END
-
-hi def link OssWarnings Error
-"-----------------------------------------------------------------------------
-
-"-----------------------------------------------------------------------------
-"""" Custom commands
-command! MakeTags !ctags -R .
-"-----------------------------------------------------------------------------
-
-"-----------------------------------------------------------------------------
-"""" Usage/Keymappings/etc.
-" disable arrow keys
-noremap <UP> <nop>
-noremap <DOWN> <nop>
-noremap <LEFT> <nop>
-noremap <RIGHT> <nop>
-
-" remap for tags, tabgar -> vim-IDE ftw :)
-nnoremap <silent> <F9> :TagbarToggle<CR>
-nnoremap <silent> <F10> :set list!<CR>
-
-" close all quickfix/location lists
-noremap <Leader>c :lcl\|ccl\|pclose<CR>
-
-" search in file tree
-noremap <Leader>r :Rg<Cr>
-
-" sort
-noremap <Leader>s :sort<CR>
-
-" insert current date time
-noremap <Leader>lm :put =strftime('Last modified: %d. %B %Y %H:%M')<CR>
-
-" remaps for incrementing/decrementing numbers
-" the second pair is for mac keyboards
-map <A-a> <C-a>
-map <A-x> <C-x>
-map å     <C-a>
-map ≈     <C-x>
-
-" remaps for moving lines (with vim-move)
-map ∆ <A-j>
-map ˚ <A-k>
-
-" tmux will send xterm-style keys when its xterm-keys option is enabled
-" NOTE: this relies on the arrow keys, which are disabled above (use b, w
-"       instead)
-if &term =~ '^screen'
-    execute "set <xUp>=\e[1;*A"
-    execute "set <xDown>=\e[1;*B"
-    execute "set <xRight>=\e[1;*C"
-    execute "set <xLeft>=\e[1;*D"
-endif
-"-----------------------------------------------------------------------------
-
-"-----------------------------------------------------------------------------
-"""" Setup C/C++
-let g:clang_use_library = 1
-
-" set clang completion behavior
-let g:clang_close_preview = 1
-let g:clang_complete_macros = 1
-let g:clang_complete_patterns = 1
-
-" set clang library path for different OS
-let s:os = substitute(system('uname'), '\n', '', '')
-if s:os == 'Darwin' || s:os == 'Mac'
-  let g:clang_library_path = '/usr/local/opt/llvm/lib/libclang.dylib'
-else
-  let g:clang_library_path = '/usr/lib/libclang.so'
-endif
-"-----------------------------------------------------------------------------
-
-"-----------------------------------------------------------------------------
-"""" Setup es6 and react/JSX support
-let g:jsx_ext_required = 0
-
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_flow = 1
-
-let g:flow#autoclose = 1
-let g:flow#showquickfix = 0
-let g:flow#timeout = 5
-"-----------------------------------------------------------------------------
-
-"-----------------------------------------------------------------------------
-"""" Plugin specific setups
-"" vim-ripgrep
-let g:rg_binary = 'rg'
-let g:rg_command = g:rg_binary . " --vimgrep -S"
-
-"" vimwiki
-" output directory
-let g:vimwiki_list = [{'path': '~/Cloud/Texte/vim/vimwiki_html'}]
-
-"" mucomplete
-" enable delayed completion on startup
-set completeopt=menuone,preview,noinsert
-let g:mucomplete#enable_auto_at_startup = 1
-" extend default chain to include UltiSnips snippets
-let g:mucomplete#chains = {
-      \ 'vim': ['path', 'cmd', 'keyn'],
-      \ 'default': ['path', 'omni', 'defs', 'keyp', 'ulti']
-      \ }
-
-"" UltiSnips
-let g:UltiSnipsExpandTrigger = '<c-l>'
-
-"" vim-airline
-let g:airline_theme = 'base16_summerfruit'
-let g:airline_powerline_fonts = 1
-
-"" Linting
-let g:ale_linters = {
-      \   'c': ['gcc', 'clang',],
-      \   'markdow': ['alex'],
-      \   'javascript': ['prettier', 'flow', 'eslint', 'stylelint'],
-      \   'typescript': ['tslint', 'tsserver'],
-      \ }
-let g:ale_linter_aliases = {'jsx': 'css'}
-let g:ale_fixers = {
-      \   'javascript': ['prettier'],
-      \   'typescript': ['prettier'],
-      \ }
-let g:ale_fix_on_save = 0
-let g:ale_javascript_prettier_options =
-      \ '--print-width 79 --single-quote --trailing-comma es5'
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_sign_column_always = 3
-
-nnoremap <Leader>al :ALEToggle<CR>
-nnoremap <Leader>af :ALEFix<CR>
-"-----------------------------------------------------------------------------
