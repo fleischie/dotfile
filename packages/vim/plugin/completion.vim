@@ -8,4 +8,11 @@ let g:mucomplete#chains = {
       \ }
 
 " expand snippets on <Ctrl-L>
-let g:UltiSnipsExpandTrigger = '<c-l>'
+let g:UltiSnipsExpandTrigger = '<f5>'
+let g:UltiSnipsJumpForwardTrigger = '<f6>'
+
+"" completion-related keybindings
+inoremap <silent> <expr> <plug>ExpandCR
+      \ mucomplete#ultisnips#expand_snippet("\<cr>")
+imap <c-l> <plug>ExpandCR
+imap <c-j> <plug>(MUcompleteFwd)
