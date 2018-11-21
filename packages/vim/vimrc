@@ -61,7 +61,6 @@ set relativenumber
 
 " set colorscheme
 let s:list_of_good_colorschemes = [
-      \ 'C64',
       \ 'badwolf',
       \ 'brogrammer',
       \ 'deepsea',
