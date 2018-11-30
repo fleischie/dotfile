@@ -7,9 +7,11 @@ let g:mucomplete#chains = {
       \ 'default': ['path', 'omni', 'defs', 'keyp', 'ulti']
       \ }
 
-" expand snippets on <Ctrl-L>
+" setup UltiSnips
+let g:UltiSnipsEnableSnipMate = 1
+let g:UltiSnipsSnippetDirectories = []
 let g:UltiSnipsExpandTrigger = '<f5>'
-let g:UltiSnipsJumpForwardTrigger = '<f6>'
+let g:UltiSnipsJumpForwardTrigger = '<c-j>'
 
 "" completion-related keybindings
 inoremap <silent> <expr> <plug>ExpandCR
