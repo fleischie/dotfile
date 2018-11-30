@@ -1,7 +1,7 @@
 " setup linters
 let g:ale_linters = {
       \   'c': ['gcc', 'clang',],
-      \   'markdow': ['alex'],
+      \   'markdown': ['alex'],
       \   'javascript': ['prettier', 'flow', 'eslint', 'stylelint'],
       \   'typescript': ['tslint', 'tsserver'],
       \ }
