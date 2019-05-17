@@ -15,7 +15,7 @@ noremap <Leader>c :lcl\|ccl\|pclose<CR>
 noremap <Leader>r :Rg<Cr>
 
 " sort
-noremap <Leader>s :sort<CR>
+noremap <Leader>s :sort i<CR>
 
 " insert current date time
 noremap <Leader>lm :put =strftime('Last modified: %d. %B %Y %H:%M')<CR>
