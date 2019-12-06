@@ -46,6 +46,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'hail2u/vim-css3-syntax'          " extra CSS3 syntax highlighting
   Plug 'sheerun/vim-polyglot'            " language pack
   Plug 'Rip-Rip/clang_complete'          " c/c++ completions
+  Plug 'MarcWeber/vim-addon-local-vimrc' " local vimrc
 
   " personal dev plugins
   Plug 'fleischie/vim-rando', { 'branch': 'main' }
