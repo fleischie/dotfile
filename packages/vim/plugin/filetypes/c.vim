@@ -1,12 +1,6 @@
-" setup to insert 8-space wide tabs
+" setup to insert 2-space wide spaces
 augroup custom_indent
   autocmd FileType * set expandtab shiftwidth=2 softtabstop=2 tabstop=2
-  autocmd FileType c set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
-  autocmd FileType cpp set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
-  autocmd FileType lex set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
-  autocmd FileType glsl set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
-  autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
-  autocmd FileType yacc set noexpandtab shiftwidth=8 softtabstop=8 tabstop=8
 augroup END
 
 " tell clang to use the library directly
