@@ -16,6 +16,6 @@ let g:UltiSnipsJumpForwardTrigger = '<c-j>'
 "" completion-related keybindings
 inoremap <silent> <expr> <plug>ExpandCR
       \ mucomplete#ultisnips#expand_snippet("\<cr>")
-imap <c-l> <plug>ExpandCR
-imap <c-j> <plug>(MUcompleteFwd)
-imap <c-b> <plug>(MUcompleteCycFwd)
+imap <silent> <c-l> <plug>ExpandCR
+imap <silent> <c-j> <plug>(MUcompleteFwd)
+imap <silent> <c-b> <plug>(MUcompleteCycFwd)
