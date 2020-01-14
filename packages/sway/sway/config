@@ -1,0 +1,213 @@
+###############################################################################
+#### Variables
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+
+# applications
+set $browser firefox
+set $term qterminal -platform wayland
+###############################################################################
+
+###############################################################################
+#### Main config
+default_border none
+
+# Move your focus around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Split horizontally/vertically
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Floating setup
+bindsym $mod+a focus parent
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+floating_modifier $mod normal
+
+### Workspaces
+# Switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# Reload the configuration file
+bindsym $mod+Shift+c exec swaymsg reload
+# Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+### Border theme
+# class                 border  background text    indicator child_border
+client.focused          #007000 #006f00    #ffffff #009000   #00e000
+client.focused_inactive #00aa00 #002200    #ffffff #009000   #00ff00
+client.unfocused        #007700 #002200    #ffffff #ff00ff   #00ee00
+client.urgent           #880000 #ff0000    #ffffff #900000   #ff0000
+
+### Resize behavior
+# Resizing containers:
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+### System control
+set $mode_system System (e)xit sway, (l)ock
+mode "$mode_system" {
+  bindsym e exec swaymsg exit, mode "default"
+  bindsym l exec swaylock, mode "default"
+
+  # exit system mode
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym Control+Mod1+Delete mode "$mode_system"
+###############################################################################
+
+###############################################################################
+#### Applications
+### autostart
+exec mako
+exec waybar
+
+### via shortcuts
+bindsym $mod+Return exec $term
+bindsym Control+$mod+w exec $browser
+
+# Start your launcher
+set $menu rofi -show run -theme c64 | xargs swaymsg exec --
+bindsym $mod+d exec $menu
+
+# background light setup
+bindcode 232 exec "light -U 5"
+bindcode 233 exec "light -A 5"
+
+# show/hide notifications via keyboards
+bindsym Control+Space exec makoctl dismiss
+# TODO: `makoctl list` just outputs the current list of notifications,
+#       thus to emulate the previous behavior the list needs to be
+#       parsed and the last item needs to be notified-sended with all
+#       available data
+# bindsym Control+Grave exec makoctl list
+###############################################################################
+
+###############################################################################
+#### Media settings
+## volume control
+bindsym XF86AudioMute exec "ponymix toggle"
+bindsym XF86AudioLowerVolume exec "ponymix decrease 5; ponymix unmute"
+bindsym XF86AudioRaiseVolume exec "ponymix increase 5; ponymix unmute"
+
+## remote control of mpc
+# once per XF86Audio-buttons, once without (because my u430p doesn't have them)
+#bindsym XF86AudioPlay exec "/home/karl/.i3/scripts/whats_playing_mpc.sh 'toggle'; mpc toggle"
+#bindcode $mod+75      exec "/home/karl/.i3/scripts/whats_playing_mpc.sh 'toggle'; mpc toggle"
+#bindsym XF86AudioStop exec "mpc stop; notify-send -i '/usr/share/icons/Adwaita/32x32/actions/media-playback-stop.png' 'Music Stopped' ''"
+#bindcode $mod+76      exec "mpc stop; notify-send -i '/usr/share/icons/Adwaita/32x32/actions/media-playback-stop.png' 'Music Stopped' ''"
+#bindsym XF86AudioPrev exec "mpc prev; /home/karl/.i3/scripts/whats_playing_mpc.sh 'prev'"
+#bindcode $mod+95      exec "mpc prev; /home/karl/.i3/scripts/whats_playing_mpc.sh 'prev'"
+#bindsym XF86AudioNext exec "mpc next; /home/karl/.i3/scripts/whats_playing_mpc.sh 'next'"
+#bindcode $mod+96      exec "mpc next; /home/karl/.i3/scripts/whats_playing_mpc.sh 'next'"
+#bindcode $mod+107 exec "/home/karl/.i3/scripts/whats_playing_mpc.sh"
+
+## remote control of cmus
+bindsym XF86AudioPlay exec "cmus-remote --pause; /home/karl/.i3/scripts/whats_playing_cmus.sh;"
+bindcode $mod+75      exec "cmus-remote --pause; /home/karl/.i3/scripts/whats_playing_cmus.sh;"
+bindsym XF86AudioStop exec "cmus-remote --stop; /home/karl/.i3/scripts/whats_playing_cmus.sh 'stop';"
+bindcode $mod+76      exec "cmus-remote --stop; /home/karl/.i3/scripts/whats_playing_cmus.sh 'stop';"
+bindsym XF86AudioPrev exec "cmus-remote --prev; /home/karl/.i3/scripts/whats_playing_cmus.sh 'prev';"
+bindcode $mod+95      exec "cmus-remote --prev; /home/karl/.i3/scripts/whats_playing_cmus.sh 'prev';"
+bindsym XF86AudioNext exec "cmus-remote --next; /home/karl/.i3/scripts/whats_playing_cmus.sh 'next';"
+bindcode $mod+96      exec "cmus-remote --next; /home/karl/.i3/scripts/whats_playing_cmus.sh 'next';"
+bindcode $mod+107 exec "/home/karl/.i3/scripts/whats_playing_cmus.sh"
+###############################################################################
+
+###############################################################################
+#### TODO: Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+###############################################################################
+
+###############################################################################
+#### external configuration files
+include /etc/sway/config.d/*
+include ./output.conf
+###############################################################################

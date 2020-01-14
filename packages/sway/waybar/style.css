@@ -1,0 +1,71 @@
+* {
+  background-color: #2d2d2d;
+  border-radius: 0;
+  border: none;
+  color: #d3c0c8;
+  font-family: Bitstream Vera Sans Mono, DejaVu Sans Mono, sans-serif;
+  font-size: 13px;
+  min-height: 0;
+}
+
+#backlight,
+#battery,
+#clock,
+#cpu,
+#custom-load,
+#disk,
+#network,
+#pulseaudio,
+#tray {
+  padding: 0 0.5em;
+}
+
+/* Workspaces ****************************************************************/
+#workspaces button {
+  background-color: transparent;
+  border-bottom: 2px solid transparent;
+  color: #d3c0c8;
+  padding: 0 5px;
+}
+
+#workspaces button:hover {
+  background: #2d2d2d;
+  box-shadow: inherit;
+}
+
+#workspaces button.focused {
+  background-color: #2d2d2d;
+  border-bottom: 2px solid #d3c0c8;
+}
+
+#workspaces button.urgent {
+  background-color: #eb4d4b;
+}
+/*****************************************************************************/
+
+/* Mode **********************************************************************/
+#mode {
+  color: #ddbc3c;
+  padding: 0 10px;
+}
+/*****************************************************************************/
+
+/* Battery *******************************************************************/
+#battery.warning {
+  color: #ddbc3c;
+}
+
+#battery.critical {
+  color: #dd693c;
+}
+/*****************************************************************************/
+
+/* Load **********************************************************************/
+#custom-load.warning {
+  color: #ddbc3c;
+}
+
+#custom-load.alert {
+  color: #dd693c;
+}
+/*****************************************************************************/

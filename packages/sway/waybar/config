@@ -1,0 +1,89 @@
+{
+  // configure appearance
+  "layer": "top",
+  "position": "top",
+  "height": "25",
+
+  // configure used modules
+  "modules-left": ["sway/workspaces", "sway/mode"],
+  "modules-center": [],
+  "modules-right": [
+    "disk",
+    "cpu",
+    "custom/load",
+    "battery",
+    "backlight",
+    "pulseaudio",
+    "network",
+    "clock"
+  ],
+
+  // configure individual modules
+  "sway/workspaces": {
+    "all-outputs": true
+  },
+  "disk": {
+    "path": "/home",
+    "interval": 300,
+    "format": " {free} / {total}"
+  },
+  "cpu": {
+    "format": " {usage}%"
+  },
+  "custom/load": {
+    "exec": "$HOME/.config/waybar/scripts/loadavg -o waybar",
+    "format": " {}",
+    "interval": 5,
+    "return-type": "json"
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 5
+    },
+    "format": "{icon} {capacity}%",
+    "format-full": " Full",
+    "format-charging": " {time}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "░",
+      "▒",
+      "▓",
+      "█"
+    ]
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "format-icons": {
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "scroll-step": 5,
+    "on-click": "pavucontrol"
+  },
+  "network": {
+    "interface": "wlp2s0",
+    "format": "{ifname}",
+    "format-wifi": " {essid} {signalStrength}%",
+    "format-ethernet": " {ifname}",
+    "format-disconnected": ""
+  },
+  "clock": {
+    "interval": 1,
+    "format": "{:%a %d. %b %Y  %H:%M:%S}"//  %H:%M:%S}"
+  }
+}
+// vim: ft=json5
