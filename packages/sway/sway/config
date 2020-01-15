@@ -11,6 +11,8 @@ set $right l
 
 # applications
 set $browser firefox
+set $curr_date $(date +%Y-%m-%d_%H-%M-%S)
+set $scrot grim
 set $term qterminal -platform wayland
 ###############################################################################
 
@@ -149,6 +151,10 @@ bindsym $mod+d exec $menu
 # background light setup
 bindcode 232 exec "light -U 5"
 bindcode 233 exec "light -A 5"
+
+# screenshots
+bindsym $mod+Shift+s exec $scrot ~/Desktop/screenshot_$curr_date.png
+bindsym $mod+Shift+d exec $scrot -g "$(slurp)" ~/Desktop/screenshot_$curr_date.png
 
 # show/hide notifications via keyboards
 bindsym Control+Space exec makoctl dismiss
