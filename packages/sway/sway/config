@@ -143,7 +143,7 @@ bindsym $mod+Return exec $term
 bindsym Control+$mod+w exec $browser
 
 # Start your launcher
-set $menu rofi -show run -theme c64 | xargs swaymsg exec --
+set $menu wofi
 bindsym $mod+d exec $menu
 
 # background light setup

@@ -21,6 +21,10 @@ mkdir -p "${CONFIG_DIR}/waybar/scripts"
 ln -vsf "${SCRIPT_DIR}/waybar/config" "${CONFIG_DIR}/waybar/"
 ln -vsf "${SCRIPT_DIR}/waybar/style.css" "${CONFIG_DIR}/waybar/"
 
+mkdir -p "${CONFIG_DIR}/wofi"
+ln -vsf "${SCRIPT_DIR}/wofi/config" "${CONFIG_DIR}/wofi/"
+ln -vsf "${SCRIPT_DIR}/wofi/style.css" "${CONFIG_DIR}/wofi/"
+
 echo -e "\n# Note:"
 echo    "## Make sure to create an \`output.conf\` file to setup the background of sway."
 echo -e "## Make sure you install all custom scripts to waybar.\n"
