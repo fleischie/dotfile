@@ -125,7 +125,7 @@ bindsym $mod+r mode "resize"
 set $mode_system System (e)xit sway, (l)ock
 mode "$mode_system" {
   bindsym e exec swaymsg exit, mode "default"
-  bindsym l exec swaylock, mode "default"
+  bindsym l exec sh ~/.config/swaylock/scripts/fancy_swaylock.sh, mode "default"
 
   # exit system mode
   bindsym Return mode "default"
