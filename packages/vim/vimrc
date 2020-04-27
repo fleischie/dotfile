@@ -1,12 +1,15 @@
 " see `./plugins` for modular vim configuration
 
+" XXX: needs to be set before loading ALE
+let g:ale_completion_enabled = 1
+
 " install and enable external plugins
 call plug#begin('~/.config/nvim/plugged')
   " default scripts
   Plug 'vim-scripts/restore_view.vim'    " restore cursor (etc.) position
 
   " vim development
-  Plug 'gerw/vim-HiLinkTrace'            " trace syntax highlighting
+  "Plug 'gerw/vim-HiLinkTrace'            " trace syntax highlighting
 
   " colors
   Plug 'flazz/vim-colorschemes'          " color scheme pack
@@ -22,33 +25,17 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-surround'              " quoting/parenthesizing
 
   " functionality extensions
-  Plug 'vimwiki/vimwiki'                 " personal wiki from inside vim
   Plug 'google/vim-searchindex'          " display number of search matches
-  Plug 'majutsushi/tagbar'               " tagbar for exuberant ctags
   Plug 'matze/vim-move'                  " move lines/selections
   Plug 'airblade/vim-gitgutter'          " show git-diff per line
   Plug 'PeterRincker/vim-argumentative'  " manipulate function arguments
-  Plug 'junegunn/vim-easy-align'         " alignment plugin
-  Plug 'junegunn/goyo.vim'               " distraction-free writing in vim
-  Plug 'junegunn/limelight.vim'          " emphasize current paragraph
 
   " workflow runtime plugins
   Plug 'editorconfig/editorconfig-vim'   " apply editorconfig if available
-  Plug 'jremmen/vim-ripgrep'             " ripgrep integration
-  Plug 'honza/vim-snippets'              " snippet library
-  Plug 'w0rp/ale'                        " asynchronous linting engine
-  " Plug 'jiangmiao/auto-pairs'            " insert/delete pair-chars
-  Plug 'lifepillar/vim-mucomplete'       " chained completion plugin
-  Plug 'SirVer/ultisnips'                " snippet engine
   Plug 'MarcWeber/vim-addon-local-vimrc' " local vimrc utility
+  Plug 'jremmen/vim-ripgrep'             " ripgrep integration
+  Plug 'MarcWeber/vim-addon-local-vimrc' " project specific vimrcs
 
   " language support
-  Plug 'hail2u/vim-css3-syntax'          " extra CSS3 syntax highlighting
-  Plug 'sheerun/vim-polyglot'            " language pack
-  Plug 'Rip-Rip/clang_complete'          " c/c++ completions
-  Plug 'MarcWeber/vim-addon-local-vimrc' " local vimrc
-
-  " personal dev plugins
-  Plug 'fleischie/vim-rando', { 'branch': 'main' }
-  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+  Plug 'dense-analysis/ale'              " asynchronous linting engine
 call plug#end()

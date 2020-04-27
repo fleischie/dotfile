@@ -13,5 +13,5 @@ set ttimeout
 set ttimeoutlen=20
 
 " setup vim-airline
-let g:airline_theme = 'base16_summerfruit'
+let g:airline_theme = 'term'
 let g:airline_powerline_fonts = 1

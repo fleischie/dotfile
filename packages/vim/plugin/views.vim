@@ -2,5 +2,5 @@
 set viewoptions=cursor,folds,slash,unix
 
 " setup folding options
-set foldmethod=syntax
+set foldmethod=marker
 set foldlevelstart=99
