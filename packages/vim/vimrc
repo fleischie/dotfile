@@ -2,6 +2,7 @@
 
 " XXX: needs to be set before loading ALE
 let g:ale_completion_enabled = 1
+let g:airline_theme = 'term'
 
 " install and enable external plugins
 call plug#begin('~/.config/nvim/plugged')
