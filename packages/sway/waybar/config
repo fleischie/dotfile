@@ -14,6 +14,7 @@
     "battery",
     "backlight",
     "pulseaudio",
+    "custom/keyboard",
     "network",
     "clock"
   ],
@@ -25,7 +26,7 @@
   "disk": {
     "path": "/home",
     "interval": 300,
-    "format": " {free} / {total}"
+    "format": " {free} / {total}"
   },
   "cpu": {
     "format": " {usage}%"
@@ -35,6 +36,11 @@
     "format": " {}",
     "interval": 5,
     "return-type": "json"
+  },
+  "custom/keyboard": {
+    "exec": "$HOME/.config/waybar/scripts/sway-keyboard-layout -V 1 -P 1",
+    "format": " {}",
+    "interval": 1
   },
   "battery": {
     "states": {
@@ -63,10 +69,9 @@
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
-    "format-muted": "",
+    "format-muted": "",
     "format-icons": {
       "default": [
-        "",
         "",
         ""
       ]
@@ -78,7 +83,7 @@
     "interface": "wlp2s0",
     "format": "{ifname}",
     "format-wifi": " {essid} {signalStrength}%",
-    "format-ethernet": " {ifname}",
+    "format-ethernet": " {ifname}",
     "format-disconnected": ""
   },
   "clock": {

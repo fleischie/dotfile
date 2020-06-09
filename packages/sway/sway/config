@@ -10,7 +10,7 @@ set $up k
 set $right l
 
 # applications
-set $browser firefox
+set $browser MOZ_ENABLE_WAYLAND=1 firefox
 set $curr_date $(date +%Y-%m-%d_%H-%M-%S)
 set $scrot grim
 set $term qterminal -platform wayland
@@ -126,6 +126,8 @@ set $mode_system System (e)xit sway, (l)ock
 mode "$mode_system" {
   bindsym e exec swaymsg exit, mode "default"
   bindsym l exec sh ~/.config/swaylock/scripts/fancy_swaylock.sh, mode "default"
+  # bindsym s exec systemctl poweroff, mode "default"
+  # bindsym p exec systemctl suspend, mode "default"
 
   # exit system mode
   bindsym Return mode "default"
@@ -147,6 +149,7 @@ bindsym Control+$mod+w exec $browser
 # Start your launcher
 set $menu wofi
 bindsym $mod+d exec $menu
+bindsym XF86Launch6 exec $menu
 
 # background light setup
 bindcode 232 exec "light -U 5"
@@ -154,6 +157,7 @@ bindcode 233 exec "light -A 5"
 
 # screenshots
 bindsym $mod+Shift+s exec $scrot ~/Desktop/screenshot_$curr_date.png
+bindsym XF86Launch1 exec $scrot ~/Desktop/screenshot_$curr_date.png
 bindsym $mod+Shift+d exec $scrot -g "$(slurp)" ~/Desktop/screenshot_$curr_date.png
 
 # show/hide notifications via keyboards
@@ -174,26 +178,26 @@ bindsym XF86AudioRaiseVolume exec "ponymix increase 5; ponymix unmute"
 
 ## remote control of mpc
 # once per XF86Audio-buttons, once without (because my u430p doesn't have them)
-#bindsym XF86AudioPlay exec "/home/karl/.i3/scripts/whats_playing_mpc.sh 'toggle'; mpc toggle"
-#bindcode $mod+75      exec "/home/karl/.i3/scripts/whats_playing_mpc.sh 'toggle'; mpc toggle"
+#bindsym XF86AudioPlay exec "/home/karl/.config/sway/scripts/whats_playing_mpc.sh 'toggle'; mpc toggle"
+#bindcode $mod+75      exec "/home/karl/.config/sway/scripts/whats_playing_mpc.sh 'toggle'; mpc toggle"
 #bindsym XF86AudioStop exec "mpc stop; notify-send -i '/usr/share/icons/Adwaita/32x32/actions/media-playback-stop.png' 'Music Stopped' ''"
 #bindcode $mod+76      exec "mpc stop; notify-send -i '/usr/share/icons/Adwaita/32x32/actions/media-playback-stop.png' 'Music Stopped' ''"
-#bindsym XF86AudioPrev exec "mpc prev; /home/karl/.i3/scripts/whats_playing_mpc.sh 'prev'"
-#bindcode $mod+95      exec "mpc prev; /home/karl/.i3/scripts/whats_playing_mpc.sh 'prev'"
-#bindsym XF86AudioNext exec "mpc next; /home/karl/.i3/scripts/whats_playing_mpc.sh 'next'"
-#bindcode $mod+96      exec "mpc next; /home/karl/.i3/scripts/whats_playing_mpc.sh 'next'"
-#bindcode $mod+107 exec "/home/karl/.i3/scripts/whats_playing_mpc.sh"
+#bindsym XF86AudioPrev exec "mpc prev; /home/karl/.config/sway/scripts/whats_playing_mpc.sh 'prev'"
+#bindcode $mod+95      exec "mpc prev; /home/karl/.config/sway/scripts/whats_playing_mpc.sh 'prev'"
+#bindsym XF86AudioNext exec "mpc next; /home/karl/.config/sway/scripts/whats_playing_mpc.sh 'next'"
+#bindcode $mod+96      exec "mpc next; /home/karl/.config/sway/scripts/whats_playing_mpc.sh 'next'"
+#bindcode $mod+107 exec "/home/karl/.config/sway/scripts/whats_playing_mpc.sh"
 
 ## remote control of cmus
-bindsym XF86AudioPlay exec "cmus-remote --pause; /home/karl/.i3/scripts/whats_playing_cmus.sh;"
-bindcode $mod+75      exec "cmus-remote --pause; /home/karl/.i3/scripts/whats_playing_cmus.sh;"
-bindsym XF86AudioStop exec "cmus-remote --stop; /home/karl/.i3/scripts/whats_playing_cmus.sh 'stop';"
-bindcode $mod+76      exec "cmus-remote --stop; /home/karl/.i3/scripts/whats_playing_cmus.sh 'stop';"
-bindsym XF86AudioPrev exec "cmus-remote --prev; /home/karl/.i3/scripts/whats_playing_cmus.sh 'prev';"
-bindcode $mod+95      exec "cmus-remote --prev; /home/karl/.i3/scripts/whats_playing_cmus.sh 'prev';"
-bindsym XF86AudioNext exec "cmus-remote --next; /home/karl/.i3/scripts/whats_playing_cmus.sh 'next';"
-bindcode $mod+96      exec "cmus-remote --next; /home/karl/.i3/scripts/whats_playing_cmus.sh 'next';"
-bindcode $mod+107 exec "/home/karl/.i3/scripts/whats_playing_cmus.sh"
+bindsym XF86AudioPlay exec "cmus-remote --pause; /home/karl/.config/sway/scripts/whats_playing_cmus.sh;"
+bindcode $mod+75      exec "cmus-remote --pause; /home/karl/.config/sway/scripts/whats_playing_cmus.sh;"
+bindsym XF86AudioStop exec "cmus-remote --stop; /home/karl/.config/sway/scripts/whats_playing_cmus.sh 'stop';"
+bindcode $mod+76      exec "cmus-remote --stop; /home/karl/.config/sway/scripts/whats_playing_cmus.sh 'stop';"
+bindsym XF86AudioPrev exec "cmus-remote --prev; /home/karl/.config/sway/scripts/whats_playing_cmus.sh 'prev';"
+bindcode $mod+95      exec "cmus-remote --prev; /home/karl/.config/sway/scripts/whats_playing_cmus.sh 'prev';"
+bindsym XF86AudioNext exec "cmus-remote --next; /home/karl/.config/sway/scripts/whats_playing_cmus.sh 'next';"
+bindcode $mod+96      exec "cmus-remote --next; /home/karl/.config/sway/scripts/whats_playing_cmus.sh 'next';"
+bindcode $mod+107 exec "/home/karl/.config/sway/scripts/whats_playing_cmus.sh"
 ###############################################################################
 
 ###############################################################################
@@ -215,5 +219,6 @@ bindcode $mod+107 exec "/home/karl/.i3/scripts/whats_playing_cmus.sh"
 ###############################################################################
 #### external configuration files
 include /etc/sway/config.d/*
+include ./input.conf
 include ./output.conf
 ###############################################################################

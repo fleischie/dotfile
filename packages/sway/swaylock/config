@@ -1,4 +1,4 @@
 daemonize
-image=/usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1366x768.png
+#image=/usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1366x768.png
 scaling=fit
 indicator-radius=75
