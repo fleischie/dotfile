@@ -13,6 +13,8 @@ ln -vsf "${SCRIPT_DIR}/mako/config" "${CONFIG_DIR}/mako/"
 
 mkdir -p "${CONFIG_DIR}/sway"
 ln -vsf "${SCRIPT_DIR}/sway/config" "${CONFIG_DIR}/sway/"
+ln -vsf "${SCRIPT_DIR}/sway/input.conf" "${CONFIG_DIR}/sway/"
+ln -vsf "${SCRIPT_DIR}/sway/scripts" "${CONFIG_DIR}/sway/"
 
 mkdir -p "${CONFIG_DIR}/swaylock/scripts"
 ln -vsf "${SCRIPT_DIR}/swaylock/config" "${CONFIG_DIR}/swaylock/"
